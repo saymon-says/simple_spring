@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container">
+    <h1>Кабинет пользователя</h1>
+    <form method="post">
+        <input type="email" name="email" class="form-control" th:value="${email}"/><br>
+        <input type="password" name="password" class="form-control" placeholder="password"/><br>
+        <div class="form-group">
+            <select class="form-control" id="exampleFormControlSelect">
+                <option name="user">Пользователь</option>
+                <option name="admin">Администратор</option>
+                <option name="redactor">Редактор</option>
+            </select>
+        </div>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="submit" value="Обновить данные" class="btn btn-success"/>
+    </form>
+
+</div>
+<div th:replace="blocks/footer :: footer"></div>
+</body>
+</html>

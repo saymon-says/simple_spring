@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container">
+    <h1>Autorizasion</h1>
+    <form th:action="@{/login}" method="post">
+        <input type="text" name="username" class="form-control" placeholder="Name"/><br>
+        <input type="password" name="password" class="form-control" placeholder="Password"/><br>
+        <input type="submit" value="Sign In" class="btn btn-success"/>
+    </form>
+</div>
+<div th:replace="blocks/footer :: footer"></div>
+</body>
+</html>
