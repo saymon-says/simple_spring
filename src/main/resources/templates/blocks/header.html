@@ -13,8 +13,13 @@
         </div>
         <div sec:authorize="isFullyAuthenticated()">
             <form th:action="@{/logout}" method="post">
-                <input type="submit" class="btn btn-danger" value="Пшел"/>
+                <input type="submit" class="btn btn-danger mr-2" value="Пшел"/>
             </form>
         </div>
+<!--        <div sec:authorize="isFullyAuthenticated()">-->
+<!--            <div sec:authorize="hasRole('ADMIN')">-->
+<!--                   <a href="/admin" class="btn btn-info">Кабинет администратора</a>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </div>
