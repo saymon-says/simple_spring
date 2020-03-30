@@ -11,13 +11,13 @@
 <div class="container">
     <h1>Кабинет пользователя</h1>
     <form method="post">
-        <input type="email" name="email" class="form-control" th:value="${email}"/><br>
-        <input type="password" name="password" class="form-control" placeholder="password"/><br>
+        <input type="email" class="form-control" th:value="${email}"/><br>
+        <input type="password" class="form-control" th:value="${password}"/><br>
         <div class="form-group">
             <select class="form-control" id="exampleFormControlSelect">
-                <option name="user">Пользователь</option>
-                <option name="admin">Администратор</option>
-                <option name="redactor">Редактор</option>
+                <option th:text="Пользователь" th:selected="${user}"></option>
+                <option th:text="Администратор" th:selected="${admin}"></option>
+                <option th:text="Редактор" th:selected="${redactor}"></option>
             </select>
         </div>
         <input type="hidden" name="_csrf" value="{{_csrf.token}}">

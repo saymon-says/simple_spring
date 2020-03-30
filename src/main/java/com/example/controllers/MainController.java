@@ -6,8 +6,6 @@ import com.example.models.User;
 import com.example.repo.ReviewRepository;
 import com.example.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -119,16 +117,30 @@ public class MainController {
 
 
     @GetMapping("/user")
-    public String usercab() { return "/user-cabinet";}
+    public String getUser(Principal principal, Map<String, Object> model) {
+        User user = userRepository.findByUsername(principal.getName());
+        model.put("email", user.getEmail());
+        model.put("password", user.getPassword());
+        String roles = String.valueOf(user.getRoles());
+        System.out.println(roles);
+        switch (roles) {
+            case ("[USER]"): model.put("user", "selected");
+            break;
+            case ("[ADMIN]"): model.put("admin", "selected");
+            break;
+            case ("[REDACTOR]"): model.put("redactor", "selected");
+            break;
+        }
+        return "/user-cabinet";}
 
     @PostMapping("/user")
-    public String getUserCab(Map<String, Object> model) {
-        User user = (User) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        String email = user.getEmail();
-        System.out.println(email);
+    public String updateUser(Principal principal, User userForm, Map<String, Object> model) {
+        User user = userRepository.findByUsername(principal.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+
+//        user.setRoles(userForm.getRoles());
+        userRepository.save(user);
         return "/user-cabinet";
     }
 }
