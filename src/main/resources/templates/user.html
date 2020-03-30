@@ -10,17 +10,16 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container">
     <h1>Кабинет пользователя</h1>
-    <form method="post">
-        <input type="email" class="form-control" th:value="${email}"/><br>
-        <input type="password" class="form-control" th:value="${password}"/><br>
+    <form th:action="user" method="post">
+        <input type="email" name="email" class="form-control" th:value="${email}"/><br>
+        <input type="password" name="password" class="form-control" th:value="${password}" placeholder="Password"/><br>
         <div class="form-group">
-            <select class="form-control" id="exampleFormControlSelect">
-                <option th:text="Пользователь" th:selected="${user}"></option>
-                <option th:text="Администратор" th:selected="${admin}"></option>
-                <option th:text="Редактор" th:selected="${redactor}"></option>
+            <select class="custom-select" name="roles">
+                <option th:text="Пользователь" th:value="USER" th:selected="${user}"></option>
+                <option th:text="Администратор" th:value="ADMIN" th:selected="${admin}"></option>
+                <option th:text="Редактор" th:value="REDACTOR" th:selected="${redactor}"></option>
             </select>
         </div>
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
         <input type="submit" value="Обновить данные" class="btn btn-success"/>
     </form>
 

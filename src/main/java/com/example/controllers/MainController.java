@@ -121,26 +121,25 @@ public class MainController {
         User user = userRepository.findByUsername(principal.getName());
         model.put("email", user.getEmail());
         model.put("password", user.getPassword());
+        model.put("role", user.getRoles());
         String roles = String.valueOf(user.getRoles());
-        System.out.println(roles);
         switch (roles) {
             case ("[USER]"): model.put("user", "selected");
-            break;
+                break;
             case ("[ADMIN]"): model.put("admin", "selected");
-            break;
+                break;
             case ("[REDACTOR]"): model.put("redactor", "selected");
-            break;
+                break;
         }
-        return "/user-cabinet";}
+        return "user";}
 
     @PostMapping("/user")
-    public String updateUser(Principal principal, User userForm, Map<String, Object> model) {
+    public String updateUser(Principal principal, User userCab, Map<String, Object> model) {
         User user = userRepository.findByUsername(principal.getName());
-        user.setEmail(userForm.getEmail());
-        user.setPassword(userForm.getPassword());
-
-//        user.setRoles(userForm.getRoles());
+        user.setEmail(userCab.getEmail());
+        user.setPassword(userCab.getPassword());
+        user.setRoles(userCab.getRoles());
         userRepository.save(user);
-        return "/user-cabinet";
+        return "redirect:/user";
     }
 }
