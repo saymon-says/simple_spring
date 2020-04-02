@@ -49,6 +49,13 @@ public class MainController {
         return "reviews";
     }
 
+    @GetMapping("/admin")
+    public String users(Map<String, Object> model) {
+        Iterable<User> users = userRepository.findAll();
+        model.put("users", users);
+        return "admin";
+    }
+
     @PostMapping("/reviews-add")
     public String reviews_add(@AuthenticationPrincipal User user,
                               @RequestParam String review_title,

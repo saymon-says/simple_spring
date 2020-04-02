@@ -1,4 +1,4 @@
-<div  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:fragment="header">
+<div xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" th:fragment="header">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal">SamCompany</h5>
         <nav class="my-2 my-md-0 mr-md-3">
@@ -16,10 +16,10 @@
                 <input type="submit" class="btn btn-danger mr-2" value="Пшел"/>
             </form>
         </div>
-<!--        <div sec:authorize="isFullyAuthenticated()">-->
-<!--            <div sec:authorize="hasRole('ADMIN')">-->
-<!--                   <a href="/admin" class="btn btn-info">Кабинет администратора</a>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div sec:authorize="isFullyAuthenticated()">
+            <div sec:authorize="hasAuthority('ADMIN')">
+                   <a href="/admin" class="btn btn-info">Кабинет администратора</a>
+            </div>
+        </div>
     </div>
 </div>

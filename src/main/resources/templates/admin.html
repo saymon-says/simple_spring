@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Кабинет Администратора</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container mt-5">
+    <h2>Все пользователи:</h2>
+    <div class="card bg-light mb-3 w-50" th:each="users : ${users}">
+        <div class="card-body">
+                <h5 class="card-title" th:text="Пользователь + ' ' + ${users.username}" />
+                <p class="card-text" th:text="Email + ': ' + ${users.email} + '. Роль на сайте: ' + ${users.roles}" />
+                <a class="btn btn-info" th:href="@{/user-} + ${users.id}">Отзывы пользователя</a>
+        </div>
+    </div>
+</div>
+<div th:replace="blocks/footer :: footer"></div>
+</body>
+</html>

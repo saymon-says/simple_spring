@@ -1,3 +1,7 @@
 Blog.iml
 .idea
 target
+.firebase
+.firebaserc
+firebase.json
+public
