@@ -41,7 +41,8 @@ public class MainController {
     @GetMapping("/reviews")
     public String reviews(Map<String, Object> model) {
         Iterable<Review> reviews = reviewRepository.findAll();
-        model.put("title", "Добавить отзыв:");
+        model.put("addText", "Добавить отзыв:");
+        model.put("title", "Все отзывы: ");
         model.put("reviews", reviews);
         return "reviews";
     }
@@ -53,15 +54,15 @@ public class MainController {
         return "admin";
     }
 
-    @GetMapping("/user-{id}")
-    public String user_review_info(@PathVariable(value = "id") long userId,
-                                   Map<String, Object> model) {
-        Optional<Review> review = reviewRepository.findById(userId);
-        ArrayList<Review> result = new ArrayList<>();
-        review.ifPresent(result::add);
-        System.out.println(result);
+    @GetMapping("/user-{author.id}")
+    public String user_review_info(@PathVariable(value = "author.id") long userId,
+                                   Map<String, Object> model) throws ClassNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ClassNotFoundException());
+        Set<Review> result = user.getReviews();
         model.put("reviews", result);
-        return "user-review-info";
+        model.put("addText", "Добавить отзыв:");
+        model.put("title", "Все отзывы пользователя: " + user.getUsername());
+        return "reviews";
     }
 
     @PostMapping("/reviews-add")

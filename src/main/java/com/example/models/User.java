@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "author")
     private Set<Review> reviews = new HashSet<>();
 
