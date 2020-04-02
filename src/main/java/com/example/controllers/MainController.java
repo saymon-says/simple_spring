@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @Controller
@@ -44,7 +41,7 @@ public class MainController {
     @GetMapping("/reviews")
     public String reviews(Map<String, Object> model) {
         Iterable<Review> reviews = reviewRepository.findAll();
-        model.put("title", "Отзывы");
+        model.put("title", "Добавить отзыв:");
         model.put("reviews", reviews);
         return "reviews";
     }
@@ -54,6 +51,17 @@ public class MainController {
         Iterable<User> users = userRepository.findAll();
         model.put("users", users);
         return "admin";
+    }
+
+    @GetMapping("/user-{id}")
+    public String user_review_info(@PathVariable(value = "id") long userId,
+                                   Map<String, Object> model) {
+        Optional<Review> review = reviewRepository.findById(userId);
+        ArrayList<Review> result = new ArrayList<>();
+        review.ifPresent(result::add);
+        System.out.println(result);
+        model.put("reviews", result);
+        return "user-review-info";
     }
 
     @PostMapping("/reviews-add")
