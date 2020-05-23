@@ -13,7 +13,7 @@
         </div>
         <div sec:authorize="isFullyAuthenticated()">
             <form th:action="@{/logout}" method="post">
-                <input type="submit" class="btn btn-danger mr-2" value="Пшел"/>
+                <input type="submit" class="btn btn-danger mr-2" value="Выйти"/>
             </form>
         </div>
         <div sec:authorize="isFullyAuthenticated()">
